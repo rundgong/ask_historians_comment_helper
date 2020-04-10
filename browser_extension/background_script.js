@@ -32,24 +32,24 @@ function onMonitoredTopicsLoad( item )
     if (respondedCount > 0)
     {
         console.log("respondedCount " + respondedCount);
-        browser.browserAction.setBadgeBackgroundColor({ color: [200, 200, 200, 255] });
-        browser.browserAction.setBadgeText({text: respondedCount.toString()});
+        chrome.browserAction.setBadgeBackgroundColor({ color: [200, 200, 200, 255] });
+        chrome.browserAction.setBadgeText({text: respondedCount.toString()});
     }
     else
     {
         console.log("No responded topics");
-        browser.browserAction.setBadgeText({text: ""});
+        chrome.browserAction.setBadgeText({text: ""});
     }
 
     // Save updated list
-    browser.storage.local.set({monitored_topics: monitoredTopics});
+    chrome.storage.local.set({monitored_topics: monitoredTopics});
 }
 
 function startMonitoredTopicsRefresh()
 {
     // Load locally stored topics, continue
-    var storagePromise = browser.storage.local.get("monitored_topics");
-    storagePromise.then(onMonitoredTopicsLoad);
+    var storagePromise = chrome.storage.local.get("monitored_topics", onMonitoredTopicsLoad);
+    //storagePromise.then(onMonitoredTopicsLoad);
 }
 
 

@@ -4,8 +4,8 @@ function addMonitoredTopic(url)
     console.log("addMonitoredTopic " + url);
     let commentCount = getCommentCount(url);
 
-    var storagePromise = browser.storage.local.get("monitored_topics");
-    storagePromise.then( (item) => {
+    var storagePromise = chrome.storage.local.get("monitored_topics",
+        (item) => {
             var monitoredTopics = item.monitored_topics;
             if (!monitoredTopics)
             {
@@ -32,10 +32,7 @@ function addMonitoredTopic(url)
             monitoredTopics.push({description:commentCount.title, 
                                   url:url, 
                                   comment_count: commentCount.topLevelComments});
-            browser.storage.local.set({monitored_topics: monitoredTopics});
-        },
-        (result) => {
-            console.log("addMonitoredTopic fail: " + result);
+            chrome.storage.local.set({monitored_topics: monitoredTopics});
         }
     );
 }

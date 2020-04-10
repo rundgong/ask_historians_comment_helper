@@ -43,11 +43,5 @@
 
   "background": {
     "scripts": ["common_functions.js", "background_script.js"]
-  },
-
-  "browser_specific_settings": {
-    "gecko": {
-        "id": "ask_historians_comment_helper@reddit"
-    }
   }
 }

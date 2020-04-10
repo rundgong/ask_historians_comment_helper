@@ -11,7 +11,7 @@ function removeMonitoredTopic(url, id)
         {
             console.log("Removing monitored item " + url);
             monitoredTopicsCache.splice(i,1);
-            browser.storage.local.set({monitored_topics: monitoredTopicsCache});
+            chrome.storage.local.set({monitored_topics: monitoredTopicsCache});
         }
     }
 // It does not look like we need to remove the element from the popup webpage
@@ -75,6 +75,6 @@ function onPopupStoredDataGot( item )
     }
 }
 
-var storagePromise = browser.storage.local.get("monitored_topics");
-storagePromise.then(onPopupStoredDataGot);
+var storagePromise = chrome.storage.local.get("monitored_topics", onPopupStoredDataGot);
+//storagePromise.then(onPopupStoredDataGot);
 
